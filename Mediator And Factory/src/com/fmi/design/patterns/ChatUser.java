@@ -6,9 +6,6 @@ public abstract class ChatUser {
     protected String username;
 
     public void send(String message) {
-        if (message.equalsIgnoreCase("addBot")){
-            addBot();
-        }
         System.out.println("Colleague - "+ username +  " --> " + message);
         mediator.send(message, this);
     }
@@ -26,13 +23,5 @@ public abstract class ChatUser {
             this.mediator.unRegister(this);
             this.mediator = null;
         }
-    }
-    private void addBot(){
-            for (ChatUser activeVisitor : mediator.activeVisitors) {
-                if (activeVisitor instanceof Bot){
-                    return;
-                }
-            }
-            mediator.register(new Bot("ChatBot"));
     }
 }
